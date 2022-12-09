@@ -1,17 +1,15 @@
 class DayEight
-
   attr_reader :forest
 
-  def initialize(input = '')
+  def initialize(input='')
     @forest = build_forest(input)
     @transposed_forest = @forest.transpose
     forest_visibility
   end
 
-
   def build_forest(string)
-    string.split("\n").map do |tree_line| 
-      tree_line.split('').map { |height| Tree.new(height.to_i)}
+    string.split("\n").map do |tree_line|
+      tree_line.split('').map { |height| Tree.new(height.to_i) }
     end
   end
 
@@ -24,10 +22,10 @@ class DayEight
   end
 
   def forest_visibility
-    forest.each do |tree_line| 
+    forest.each do |tree_line|
       set_visible(tree_line)
       set_visible(tree_line.reverse)
-     end
+    end
     @transposed_forest.each do |tree_line|
       set_visible(tree_line)
       set_visible(tree_line.reverse)
@@ -69,7 +67,7 @@ class Tree
   def initialize(height)
     @height = height
     @visible = nil
-    @scenic_score = {ns: 0, ew: 0, sn: 0, we: 0}
+    @scenic_score = { ns: 0, ew: 0, sn: 0, we: 0 }
   end
 
   def to_s

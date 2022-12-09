@@ -20,19 +20,19 @@ RSpec.describe DayEight do
 
   describe '#set_visible' do
     it 'sets visible to true if tree is visible' do
-      tree_line = DayEight.new.build_forest("1")[0]
+      tree_line = DayEight.new.build_forest('1')[0]
       DayEight.new.set_visible(tree_line)
-      expect(tree_line.first.visible).to eq(true)
+      expect(tree_line.first.visible).to be(true)
     end
-    
+
     it 'sets visible to false if tree is not visible' do
-      tree_line = DayEight.new.build_forest("21")[0]
+      tree_line = DayEight.new.build_forest('21')[0]
       DayEight.new.set_visible(tree_line)
-      expect(tree_line.last.visible).to eq(false)
+      expect(tree_line.last.visible).to be(false)
     end
 
     it 'sets visible to true if tree is visible behind non visible tree' do
-      tree_line = DayEight.new.build_forest("325")[0]
+      tree_line = DayEight.new.build_forest('325')[0]
       DayEight.new.set_visible(tree_line)
       tree_line_values = tree_line.map { |tree| tree.visible }
       expect(tree_line_values).to eq([true, false, true])
@@ -40,16 +40,16 @@ RSpec.describe DayEight do
   end
 
   describe '#forest_visibility' do
-    let(:forest) do 
-      DayEight.new("30373\n25512\n65332\n33549\n35390") 
+    let(:forest) do
+      DayEight.new("30373\n25512\n65332\n33549\n35390")
     end
 
-    it { expect(forest.forest[0][0].visible).to eq(true) }
-    it { expect(forest.forest[1][1].visible).to eq(true) }
-    it { expect(forest.forest[1][3].visible).to eq(false) }
-    it { expect(forest.forest[2][3].visible).to eq(true) }
-    it { expect(forest.forest[1][1].visible).to eq(true) }
-    it { expect(forest.forest[1][2].visible).to eq(true) }
+    it { expect(forest.forest[0][0].visible).to be(true) }
+    it { expect(forest.forest[1][1].visible).to be(true) }
+    it { expect(forest.forest[1][3].visible).to be(false) }
+    it { expect(forest.forest[2][3].visible).to be(true) }
+    it { expect(forest.forest[1][1].visible).to be(true) }
+    it { expect(forest.forest[1][2].visible).to be(true) }
   end
 
   describe '#visible_trees' do
@@ -59,8 +59,8 @@ RSpec.describe DayEight do
   end
 
   describe '#set_scenic_score' do
-    let(:forest) do 
-      forest = DayEight.new("30373\n25512\n65332\n33549\n35390") 
+    let(:forest) do
+      forest = DayEight.new("30373\n25512\n65332\n33549\n35390")
       forest.set_scenic_score
       forest
     end

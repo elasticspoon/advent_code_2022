@@ -1,30 +1,29 @@
 class DayFive
-
   attr_reader :crate_state
 
   def initialize(input)
     @crate_state = DayFive.set_crate_state(input)
     @operations = DayFive.get_operations(input)
   end
-  
+
   def self.get_top_crates(crate_state)
-    crate_state.map{ |x| x.first || ''}.join
+    crate_state.map { |x| x.first || '' }.join
   end
 
   def self.get_operations(input)
     input.split("\n\n").last.split("\n")
   end
-  
+
   def self.set_crate_state(input)
     chars = input.split("\n\n").first.split("\n")[...-1].map(&:chars)
-    
-    cols = chars.map do |row| 
+
+    cols = chars.map do |row|
       row.each_with_index.filter_map do |char, index|
         char if index % 4 == 1
       end
     end
-    
-    cols.transpose.each { |col| col.delete(' ')}
+
+    cols.transpose.each { |col| col.delete(' ') }
   end
 
   def do_operation(operation, reverse: false)
@@ -48,7 +47,6 @@ class DayFive
     @operations.each { |operation| do_operation(operation, reverse: false) }
     puts DayFive.get_top_crates(@crate_state).inspect
   end
-
 end
 
 File.open('day_five_input.txt') do |file|
@@ -57,5 +55,4 @@ File.open('day_five_input.txt') do |file|
   boat.do_operations_reverse
   boat = DayFive.new(content)
   boat.do_operations
-
 end
